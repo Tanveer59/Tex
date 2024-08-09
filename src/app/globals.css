@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: outfit-l;
+  src: url('../Outfit/static/Outfit-Light.ttf');
+}
+
+@font-face {
+  font-family: outfit-b;
+  src: url('../Outfit/static/Outfit-Bold.ttf');
+}
+
+.outfit-light {
+  font-family: 'outfit-l';
+}
+
+.outfit-bold {
+  font-family: 'outfit-b';
+  font-weight: bold;
+}
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background-color: rgb(202, 202, 202);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+
+.heading{
+  font-weight: bold;
+}
