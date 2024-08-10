@@ -181,8 +181,15 @@ const Basic = () => {
 
     const handleFormSubmit = (values) => {
         const selectedItems = Object.keys(checkedItems).filter(item => checkedItems[item]);
+        Console();
         console.log('Selected items:', selectedItems);
         console.log('Form values:', values);
+
+
+    // Optionally, clear the selected checkboxes and other states
+        setCheckedItems({});
+        setSelectedCheckbox(null);
+        setSpacific(null);
     };
 
 
@@ -194,7 +201,7 @@ const Basic = () => {
         // Create a new object with only the matching keys
         const filteredItems = itemsApiResponse.filter(item => keysToMatch.includes(item.name));
         
-        console.log({applicable_id: [filteredItems.map(item => item.id)], applied_to:[filteredItems.map(item => item.name)],Rate:[filteredItems.map(item => item.net_quantity)]})
+        console.log( {applicable_id: [filteredItems.map(item => item.id)], applied_to:[filteredItems.map(item => item.name)],Rate:[filteredItems.map(item => item.net_quantity)]})
     }
     
     
@@ -203,7 +210,7 @@ const Basic = () => {
     return (
         <div className='flex flex-col w-full rounded-sm'>
             <Formik
-                initialValues={{ label: '', percentage: '' }}
+                initialValues={{ label: '', percentage: '', key: '', Search: '' }}
                 validate={values => {
                     const errors = {};
                     if (!values.label) {
@@ -216,12 +223,7 @@ const Basic = () => {
                     }
                     return errors;
                 }}
-                onSubmit={(values, { setSubmitting }) => {
-                    setTimeout(() => {
-                        handleFormSubmit(values);
-                        setSubmitting(false);
-                    }, 400);
-                }}
+                onSubmit={handleFormSubmit}
             >
                 {({
                     errors,
@@ -237,7 +239,6 @@ const Basic = () => {
                                 name="key"
                             />
                             {errors.label && touched.label && <div>{errors.label}</div>}
-
                             <Field
                                 className='mb-2 p-3 outline-none border w-1/4 placeholder:text-right [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
                                 placeholder='%'
@@ -365,7 +366,7 @@ const Basic = () => {
                             <button
                                 type="submit"
                                 className="absolute right-0 mt-4 p-2 mr-4 bg-[#f16d36] rounded text-white"
-                                onClick={Console}
+                                onClick={handleFormSubmit}
                             >
                                 {`Apply tax to ${checkedList} item(s)`}
                             </button>
